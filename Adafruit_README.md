@@ -1,23 +1,25 @@
-Joey LED display board Raspberry-Pi Python code library
+Adafruit's Raspberry-Pi Python Code Library
 ============
-  Here is the Python code library for the Joey 4-digit 7-segment LED Raspberry Pi display board
-  by David Meiklejohn (Gooligum Electronics) and Steve O'Brien
+  Here is a growing collection of libraries and example python scripts
+  for controlling a variety of Adafruit electronics with a Raspberry Pi
   
-  Based on Adafruit's "LED Backpack" and I2C example code originally 
-  written by Limor Fried, Kevin Townsend and Mikey Sklar for Adafruit Industries.
-  BSD license, all text above and below must be included in any redistribution
+  In progress!
 
-  Key (jumper) scanning methods added by David Meiklejohn
+  Adafruit invests time and resources providing this open source code,
+  please support Adafruit and open-source hardware by purchasing
+  products from Adafruit!
+
+  Written by Limor Fried, Kevin Townsend and Mikey Sklar for Adafruit Industries.
+  BSD license, all text above and below must be included in any redistribution
   
   To download, we suggest logging into your Pi with Internet accessibility and typing:
   
 ```bash
-git clone https://github.com/gooligumelec/Joey-support-Python-code.git
+git clone https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git
 ```
 
 ============
 Copyright (c) 2012-2013 Limor Fried, Kevin Townsend and Mikey Sklar for Adafruit Industries.
-Copyright (c) 2015 David Meiklejohn
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
