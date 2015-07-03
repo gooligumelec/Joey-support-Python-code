@@ -31,7 +31,7 @@ class joeyBoard:
   # Constructor
   def __init__(self, address=0x70, debug=False):
     if (debug):
-      print "Initializing a new instance of HT16K33 display board at 0x%02X" % address
+      print("Initializing a new instance of HT16K33 display board at 0x%02X" % address)
     self.disp = HT16K33(address=address, debug=debug)
 
   def writeDigitRaw(self, colval, rowval):
