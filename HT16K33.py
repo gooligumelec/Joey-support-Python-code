@@ -101,5 +101,3 @@ class HT16K33:
       return
     return self.i2c.readU16(self.__HT16K33_ADDRESS_KEY_DATA + row*2)
 
-led = HT16K33(0x70)
-
