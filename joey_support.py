@@ -60,6 +60,16 @@ class joeyBoard:
     else:
       self.disp.setBufferRow(6, 0)
 
+  def setDegrees(self, state=True):
+    "Enables or disables the degrees symbol"
+    # Warning: This function assumes that the degrees symbol is on COM4
+    # which is the case for the Joey display, but may need to be modified
+    # if another display type is used
+    if (state):
+      self.disp.setBufferRow(4, 0xFFFF)
+    else:
+      self.disp.setBufferRow(4, 0)
+
   def getJumpers(self):
     "Returns current jumper settings as a 3-bit value (JP1:JP3)"
     # read key data once to clear old jumper settings
