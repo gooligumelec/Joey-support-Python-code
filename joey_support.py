@@ -5,7 +5,9 @@
 #   Based on Adafruit_LEDBackpack.py module
 #   7-segment display class modified to support "Joey" 4-digit display
 #   Functions added to read jumper settings on Joey board
-#   v1.0    19/6/15
+#   Character patterns extended to all letters (0-9, A-Z, space)
+#   writeChar and writeWord methods added
+#   v1.2    7/10/15
 #
 #   David Meiklejohn
 #   Gooligum Electronics
@@ -20,10 +22,15 @@ from HT16K33 import HT16K33
 class joeyBoard:
   disp = None
  
-  # Hexadecimal character lookup table (row 1 = 0..9, row 2 = 5..9, row 3 = A..F)
-  pattern = [ 0x3027, 0x0006, 0x3043, 0x2047, 0x0066, \
-              0x2065, 0x3065, 0x0007, 0x3067, 0x2067, \
-              0x1067, 0x3064, 0x3021, 0x3046, 0x3061, 0x1061 ]
+  # Character pattern lookup table
+  pattern = [ 0x3027, 0x0006, 0x3043, 0x2047, 0x0066,           # 0..4  \
+              0x2065, 0x3065, 0x0007, 0x3067, 0x2067,           # 5..9  \
+              0x1067, 0x3064, 0x3021, 0x3046, 0x3061, 0x1061,   # A..F  \
+              0x2067, 0x1066, 0x0006, 0x3006, 0x3062,           # G..K  \
+              0x3020, 0x1044, 0x1027, 0x3027, 0x1063,           # L..P  \
+              0x0067, 0x1040, 0x2065, 0x3060, 0x3026,           # Q..U  \
+              0x3026, 0x3004, 0x1066, 0x2066, 0x3043, 0x0000 ]  # V..Z, space
+
 
   # Column lookup table (digit 1 .. digit 4)
   column = [ 1, 5, 7, 0 ]
@@ -49,6 +56,26 @@ class joeyBoard:
       return
     # Set the appropriate digit
     self.disp.setBufferRow(self.column[digit-1], self.pattern[value] | (dot << 11))
+
+  def writeChar(self, digit, char, dot=False):
+    "Displays a single character (0..9, A..Z) on specified digit"
+    if (digit > 4):
+      return
+    # get index into pattern table
+    try:
+      patidx = ('0123456789abcdefghijklmnopqrstuvwxyz ').index(char[0].lower())
+    except (ValueError, IndexError):
+      return
+    # Set the appropriate digit
+    self.disp.setBufferRow(self.column[digit-1], self.pattern[patidx] | (dot << 11))
+
+  def writeWord(self, word):
+    "Displays a word (up to 4 chars), right-justified, space padded"
+    # trim word to 4 digits and pad it
+    word=(4*' '+word[:4])[-4:]
+    # display it
+    for x in range(4):
+      self.writeChar(x+1, word[x])
 
   def setColon(self, state=True):
     "Enables or disables the colon character"
