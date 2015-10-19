@@ -6,8 +6,9 @@
 #   7-segment display class modified to support "Joey" 4-digit display
 #   Functions added to read jumper settings on Joey board
 #   Character patterns extended to all letters (0-9, A-Z, space)
-#   writeChar and writeWord methods added
-#   v1.2    7/10/15
+#   writeChar and writeWord methods added            7/10/15
+#   setDP, writeInt and writeValue methods added    19/10/15
+#   v1.3    19/10/15
 #
 #   David Meiklejohn
 #   Gooligum Electronics
@@ -29,7 +30,8 @@ class joeyBoard:
               0x2067, 0x1066, 0x0006, 0x3006, 0x3062,           # G..K  \
               0x3020, 0x1044, 0x1027, 0x3027, 0x1063,           # L..P  \
               0x0067, 0x1040, 0x2065, 0x3060, 0x3026,           # Q..U  \
-              0x3026, 0x3004, 0x1066, 0x2066, 0x3043, 0x0000 ]  # V..Z, space
+              0x3026, 0x3004, 0x1066, 0x2066, 0x3043,           # V..Z  \
+              0x0000, 0x0040 ]                                  # space, '-'
 
 
   # Column lookup table (digit 1 .. digit 4)
@@ -57,13 +59,22 @@ class joeyBoard:
     # Set the appropriate digit
     self.disp.setBufferRow(self.column[digit-1], self.pattern[value] | (dot << 11))
 
+  def setDP(self, digit, dot=True):
+    "Enables or disables the decimal point on specified digit"
+    if (digit > 4):
+      return
+    # get the current pattern displayed on this digit, with DP cleared (bit 11)
+    currpat = self.disp.getBufferRow(self.column[digit-1]) & ~(1<<11)
+    # write new pattern with DP optionally set
+    self.disp.setBufferRow(self.column[digit-1], currpat | (dot << 11))
+
   def writeChar(self, digit, char, dot=False):
     "Displays a single character (0..9, A..Z) on specified digit"
     if (digit > 4):
       return
     # get index into pattern table
     try:
-      patidx = ('0123456789abcdefghijklmnopqrstuvwxyz ').index(char[0].lower())
+      patidx = ('0123456789abcdefghijklmnopqrstuvwxyz -').index(char[0].lower())
     except (ValueError, IndexError):
       return
     # Set the appropriate digit
@@ -76,6 +87,30 @@ class joeyBoard:
     # display it
     for x in range(4):
       self.writeChar(x+1, word[x])
+
+  def writeInt(self, value):
+    "Displays a rounded integer value (up to 4 digits), right-justified, space padded"
+    # convert value to text string
+    text = str(int(round(value)))
+    if len(text) > 4:
+      text = 'over'
+    # trim text to 4 digits and pad it
+    text=(4*' '+text[:4])[-4:]
+    # display it
+    self.writeWord(text)
+
+  def writeValue(self, value, places=0):
+    "Displays a rounded value (up to 4 digits) to specified decimal places (max 3), space padded"
+    # limit max decimal places
+    if value < 0 and places > 2:
+      places = 2 
+    if value >= 0 and places > 3:
+      places = 3
+    # display rounded value
+    self.writeInt(value*10**places)
+    # turn on DP dot
+    if places > 0:
+      self.setDP(4-places)
 
   def setColon(self, state=True):
     "Enables or disables the colon character"
