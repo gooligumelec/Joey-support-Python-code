@@ -1,4 +1,13 @@
 #!/usr/bin/python
+#
+# Driver for Holtek HT16K33
+#
+# Based on Adafruit_LEDBackpack/Adafruit_LEDBackpack.py
+# Added getKeys() method to read raw key presses recorded by HT16K33 keyscan
+#   v1.1    19/10/15
+#
+#   David Meiklejohn
+#   Gooligum Electronics
 
 import time
 from copy import copy
@@ -7,9 +16,6 @@ from Adafruit_I2C import Adafruit_I2C
 # ============================================================================
 # HT16K33 Class
 # ============================================================================
-#
-# Driver for Holtek HT16K33
-# Modified from the original Adafruit code by David Meiklejohn
 
 class HT16K33:
   i2c = None
