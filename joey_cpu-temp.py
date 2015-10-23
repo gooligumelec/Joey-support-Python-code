@@ -49,5 +49,5 @@ try:
 
 
 except KeyboardInterrupt:
-  display.disp.clear()    #clear display to start
+  display.disp.clear()    #clear display on exit
 
