@@ -3,9 +3,10 @@
 # CPU temperature display
 #
 # Continually displays CPU temperature in 
-#  in degrees Celsius
+#  in degrees Celsius or Fahrenheit
 #  on Joey board
 #
+#   added units select, deg F display   23/10/15
 #   v1.1    23/10/15
 #
 #   David Meiklejohn
