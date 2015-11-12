@@ -5,14 +5,13 @@
 # Written by S G OBrien  April - June 2015.
 # modified by David Meiklejohn (Gooligum Electronics)
 #
-#   v1.2    11/11/15
+#   v1.3    12/11/15
 #
 # THIS CODE CANNOT BE USED OR REPRODUCED WITHOUT PERMISSION FROM THE AUTHORS
 # COPYRIGHT 2015.
 #----------------------------------------------------------------------------
 
 import time
-import datetime
 import os
 from joey_support import joeyBoard
 # ===========================================================================
