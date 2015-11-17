@@ -69,7 +69,7 @@ class joeyBoard:
     self.disp.setBufferRow(self.column[digit-1], currpat | (dot << 11))
 
   def writeChar(self, digit, char, dot=False):
-    "Displays a single character (0..9, A..Z) on specified digit"
+    "Displays a single character (0..9, A..Z, space, -) on specified digit"
     if (digit > 4):
       return
     # get index into pattern table
@@ -133,7 +133,7 @@ class joeyBoard:
       self.disp.setBufferRow(4, 0)
 
   def getJumpers(self):
-    "Returns current jumper settings as a 3-bit value (JP1:JP3)"
+    "Returns current jumper settings as a 3-bit value (JP3:JP1)"
     # read key data once to clear old jumper settings
     self.disp.getKeys(0)
     time.sleep(0.025)    # delay 25ms between reads (due to 20ms debounce time)
