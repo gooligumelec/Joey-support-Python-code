@@ -6,7 +6,7 @@
 # on Joey display
 #
 # Based on Adafruit_LEDBackpack/ex_7segment_clock.py example
-#   v1.0    19/10/15
+#   v1.1    17/11/15
 #
 #   David Meiklejohn
 #   Gooligum Electronics
@@ -19,8 +19,6 @@ from joey_support import joeyBoard
 # Clock Example
 # ===========================================================================
 display = joeyBoard()
-
-print("Press CTRL+Z to run clock in background")
 
 # Continually update the time on the "Joey" 4 char, 7-segment display
 while(True):
