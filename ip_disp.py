@@ -5,7 +5,7 @@
 # Written by S G OBrien  April - June 2015.
 # modified by David Meiklejohn (Gooligum Electronics)
 #
-#   v1.3    12/11/15
+#   v1.4    17/11/15
 #
 # THIS CODE CANNOT BE USED OR REPRODUCED WITHOUT PERMISSION FROM THE AUTHORS
 # COPYRIGHT 2015.
@@ -19,25 +19,20 @@ from joey_support import joeyBoard
 # initialise Joey board
 display = joeyBoard()
 
-print "IP Address Display 4 digit 7 segment display module"
+print("IP Address Display 4 digit 7 segment display module")
 
-# get first valid IP address line from ifconfig
-address = os.popen('ifconfig | grep "inet addr" | grep -v 127.0.0.1').readline()
+# get IP address from "hostname -I"
+address = os.popen('hostname -I').readline()
 
-# extract the address characters
-adr1 = address
-#split out the ip address, whitespace is the delimiter
-a,b,c,d=adr1.split()
-#remove the characters in front of the IP address numbers
-adr1=b[5:]
+# split out the ip address, whitespace is the delimiter
+adr1 = address.split()[0]
 #split out the four components of the ip address, '.' is the delimiter
-adr1.split('.')
 a,b,c,d=adr1.split('.')
 a = int(a)
 b = int(b)
 c = int(c)
 d = int(d)
-print "IP address is :", a, b, c, d
+print("IP address is :", a, b, c, d)
 
 # paus is a function that pauses between each number and
 # displays "dot" so you can tell if the IP address has two numbers the same

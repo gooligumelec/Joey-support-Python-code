@@ -20,7 +20,7 @@ from joey_support import joeyBoard
 # ===========================================================================
 display = joeyBoard()
 
-print "Press CTRL+Z to run clock in background"
+print("Press CTRL+Z to run clock in background")
 
 # Continually update the time on the "Joey" 4 char, 7-segment display
 while(True):
