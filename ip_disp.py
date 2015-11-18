@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # IP address display for Raspberry Pi boards
 #
 # Written by S G OBrien  April - June 2015.
 # modified by David Meiklejohn (Gooligum Electronics)
 #
-#   v1.4    17/11/15
+#   v1.5    18/11/15
 #
 # THIS CODE CANNOT BE USED OR REPRODUCED WITHOUT PERMISSION FROM THE AUTHORS
 # COPYRIGHT 2015.
